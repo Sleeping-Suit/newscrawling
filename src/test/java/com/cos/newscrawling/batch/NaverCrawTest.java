@@ -1,5 +1,10 @@
 package com.cos.newscrawling.batch;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -39,6 +44,7 @@ public class NaverCrawTest {
 	@Test
 	public void test3() {
 		RestTemplate rt = new RestTemplate();
+		List<NewsTest> nts = new ArrayList<>();
 		
 		for (int i = 1; i < 11; i++) {
 			String aid = String.format("%010d", aidNum);
@@ -55,7 +61,12 @@ public class NaverCrawTest {
 			System.out.println(title);
 			System.out.println(time);
 			
+			NewsTest nt = NewsTest.builder().title(title).time(time).build();
+			
+			nts.add(nt);
+			
 			aidNum ++;
 		}
+		assertTrue(nts.size() == 10);
 	}
 }
