@@ -1,5 +1,8 @@
 package com.cos.newscrawling.batch;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,5 +17,13 @@ public class NaverCrawTest {
 		
 		String html = rt.getForObject(url, String.class);
 		System.out.println(html);
+		
+		// Jsoup로 ArticleTitle 파싱
+		Document doc = Jsoup.parse(html);
+		
+		Element titleElement = doc.selectFirst("#articleTitle");
+		String title = titleElement.text();
+		
+		System.out.println(title);
 	}
 }
