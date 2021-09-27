@@ -9,6 +9,8 @@ import org.springframework.web.client.RestTemplate;
 // 주소: https://news.naver.com/main/read.naver?mode=LSD&mid=shm&sid1=100&oid=003&aid=0000000001
 public class NaverCrawTest {
 
+	int aidNum = 1;
+	
 	// @Test
 	public void test1() {
 		RestTemplate rt = new RestTemplate();
@@ -39,16 +41,21 @@ public class NaverCrawTest {
 		RestTemplate rt = new RestTemplate();
 		
 		for (int i = 1; i < 11; i++) {
-			String aid = String.format("%010d", i);
+			String aid = String.format("%010d", aidNum);
 			String url = "https://news.naver.com/main/read.naver?mode=LSD&mid=shm&sid1=100&oid=003&aid="+aid;
 			String html = rt.getForObject(url, String.class);
 			
 			Document doc = Jsoup.parse(html);
 			
 			Element titleElement = doc.selectFirst("#articleTitle");
+			Element timeElement = doc.selectFirst(".t11");
 			String title = titleElement.text();
+			String time = timeElement.text();
 			
 			System.out.println(title);
+			System.out.println(time);
+			
+			aidNum ++;
 		}
 	}
 }
