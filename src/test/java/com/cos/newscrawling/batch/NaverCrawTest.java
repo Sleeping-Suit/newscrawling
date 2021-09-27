@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 // 주소: https://news.naver.com/main/read.naver?mode=LSD&mid=shm&sid1=100&oid=003&aid=0000000001
 public class NaverCrawTest {
 
-	@Test
+	// @Test
 	public void test1() {
 		RestTemplate rt = new RestTemplate();
 		
@@ -25,5 +25,12 @@ public class NaverCrawTest {
 		String title = titleElement.text();
 		
 		System.out.println(title);
+	}
+	
+	// @Test
+	public void test2() {
+		for (int i = 1; i < 11; i++) {
+			System.out.println(String.format("%010d", i));
+		}
 	}
 }
