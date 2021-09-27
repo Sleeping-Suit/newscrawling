@@ -33,4 +33,22 @@ public class NaverCrawTest {
 			System.out.println(String.format("%010d", i));
 		}
 	}
+	
+	@Test
+	public void test3() {
+		RestTemplate rt = new RestTemplate();
+		
+		for (int i = 1; i < 11; i++) {
+			String aid = String.format("%010d", i);
+			String url = "https://news.naver.com/main/read.naver?mode=LSD&mid=shm&sid1=100&oid=003&aid="+aid;
+			String html = rt.getForObject(url, String.class);
+			
+			Document doc = Jsoup.parse(html);
+			
+			Element titleElement = doc.selectFirst("#articleTitle");
+			String title = titleElement.text();
+			
+			System.out.println(title);
+		}
+	}
 }
